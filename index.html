@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&family=Ubuntu+Mono&display=swap"
+    rel="stylesheet"
+  />
+
+  <head>
+    <title>SALSA TIME</title>
+  </head>
+  <body>
+    <h1>COLUMBIAN SALSA</h1>
+    <h3>It's about to get dancy out here</h3>
+    <button id="dance-moves-button">Get dance moves</button>
+    <div class="dance_moves_list" id="dance-moves-list" />
+  </body>
+
+  <script>
+    const danceMovesButton = document.getElementById("dance-moves-button");
+    danceMovesButton.addEventListener("click", () => {
+      fetch("/api/contacts")
+        .then((response) => response.json())
+        .then((data) => {
+          const danceMovesList = document.getElementById("dance-moves-list");
+          data?.data?.allSalsaDanceMoves.forEach((danceMove) => {
+            console.log(danceMove);
+
+            const danceMoveItem = document.createElement("div");
+            danceMoveItem.classList.add("dance_move_item");
+            danceMoveItem.innerText = danceMove;
+            danceMovesList.appendChild(danceMoveItem);
+          });
+        });
+    });
+  </script>
+
+  <style>
+    body {
+      background-color: lightgreen;
+      font-family: "Prompt", sans-serif;
+      padding: 24px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-family: "Ubuntu Mono", monospace;
+      font-size: 50px;
+      color: darkgreen;
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 20px;
+      color: darkgreen;
+      margin-bottom: 24px;
+    }
+
+    button {
+      background-color: darkgreen;
+      color: lightgreen;
+      font-size: 20px;
+      border: none;
+      border-radius: 4px;
+      padding: 8px;
+      margin-top: 16px;
+    }
+
+    button:hover {
+      background-color: lightgreen;
+      color: darkgreen;
+      cursor: pointer;
+    }
+
+    .dance_moves_list {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dance_move_item {
+      font-size: 20px;
+      color: darkgreen;
+      margin-bottom: 8px;
+    }
+  </style>
+</html>

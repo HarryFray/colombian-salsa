@@ -1,13 +1,15 @@
 const express = require("express");
-var bodyParser = require("body-parser");
+const errorHandler = require("./middleware/errorHandler");
 const dotenv = require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 // APP MIDDLEWARE
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json());
 app.use("/api/contacts", require("./routes/contactRoutes"));
+app.use("/", require("./routes/uiRoutes"));
+
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
