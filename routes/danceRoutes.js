@@ -1,15 +1,15 @@
 const express = require("express");
 const {
-  getAllContacts,
+  getAllDances,
   createContact,
   getContactById,
   updateContact,
   deleteContact,
-} = require("../controllers/contactController");
+} = require("../controllers/danceController");
 
 const router = express.Router();
 
-router.route("/").get(getAllContacts).post(createContact);
+router.route("/").get(getAllDances).post(createContact);
 
 router
   .route("/:id")

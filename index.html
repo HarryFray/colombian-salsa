@@ -20,17 +20,15 @@
   <script>
     const danceMovesButton = document.getElementById("dance-moves-button");
     danceMovesButton.addEventListener("click", () => {
-      fetch("/api/contacts")
+      fetch("/api/dance-moves")
         .then((response) => response.json())
         .then((data) => {
           const danceMovesList = document.getElementById("dance-moves-list");
-          data?.data?.allSalsaDanceMoves.forEach((danceMove) => {
-            console.log(danceMove);
-
-            const danceMoveItem = document.createElement("div");
-            danceMoveItem.classList.add("dance_move_item");
-            danceMoveItem.innerText = danceMove;
-            danceMovesList.appendChild(danceMoveItem);
+          data?.data?.allSalsaDanceMoves.forEach((danceMoveName) => {
+            const danceMoveElement = document.createElement("div");
+            danceMoveElement.classList.add("dance_move_item");
+            danceMoveElement.innerText = danceMoveName;
+            danceMovesList.appendChild(danceMoveElement);
           });
         });
     });

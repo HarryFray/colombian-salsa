@@ -1,9 +1,9 @@
-//@desc Get all contacts
-//@route GET /api/contacts
+//@desc Get all dance-moves
+//@route GET /api/dance-moves
 //@access Public
-const getAllContacts = (req, res) => {
+const getAllDances = (req, res) => {
   res.status(200).json({
-    message: "GET ALL CONTACTS",
+    message: "GET ALL DANCES",
     data: {
       allSalsaDanceMoves: [
         "The Basic",
@@ -21,8 +21,8 @@ const getAllContacts = (req, res) => {
   });
 };
 
-//@desc Create new contact
-//@route POST /api/contacts
+//@desc Create new dance
+//@route POST /api/dance-moves
 //@access Public
 const createContact = (req, res) => {
   const { name, email, phone } = req.body;
@@ -30,32 +30,32 @@ const createContact = (req, res) => {
     res.status(400);
     throw new Error("Please provide name, email and phone number in the body");
   }
-  res.status(201).json({ message: `CREATE CONTACT: ${req.body.name}` });
+  res.status(201).json({ message: `CREATE DANCE: ${req.body.name}` });
 };
 
-//@desc Get contact by id
-//@route GET /api/contacts/:id
+//@desc Get dance by id
+//@route GET /api/dance-moves/:id
 //@access Public
 const getContactById = (req, res) => {
-  res.status(200).json({ message: `GET CONTACT FOR ${req.params.id}` });
+  res.status(200).json({ message: `GET DANCE FOR ${req.params.id}` });
 };
 
-//@desc Update contact
-//@route PUT /api/contacts:id
+//@desc Update dance
+//@route PUT /api/dance-moves:id
 //@access Public
 const updateContact = (req, res) => {
-  res.status(200).json({ message: `UPDATE CONTACT FOR ${req.params.id}` });
+  res.status(200).json({ message: `UPDATE DANCE FOR ${req.params.id}` });
 };
 
-//@desc Delete contact
-//@route DELETE /api/contacts:id
+//@desc Delete dance
+//@route DELETE /api/dance-moves:id
 //@access Public
 const deleteContact = (req, res) => {
-  res.status(200).json({ message: `DELETE CONTACT FOR ${req.params.id}` });
+  res.status(200).json({ message: `DELETE DANCE FOR ${req.params.id}` });
 };
 
 module.exports = {
-  getAllContacts,
+  getAllDances,
   createContact,
   getContactById,
   updateContact,
