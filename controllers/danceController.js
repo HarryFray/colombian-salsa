@@ -6,7 +6,6 @@ const Dance = require("../models/danceModel");
 //@access Public
 const getAllDances = asyncHandler(async (req, res) => {
   const dances = await Dance.find();
-  console.log(dances);
   res.status(200).json(dances);
 });
 
