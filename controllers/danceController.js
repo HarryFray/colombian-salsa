@@ -1,37 +1,27 @@
 const asyncHandler = require("express-async-handler");
+const Dance = require("../models/danceModel");
 
 //@desc Get all dance-moves
 //@route GET /api/dance-moves
 //@access Public
 const getAllDances = asyncHandler(async (req, res) => {
-  res.status(200).json({
-    message: "GET ALL DANCES",
-    data: {
-      allSalsaDanceMoves: [
-        "The Basic",
-        "The Cross Body Lead",
-        "The Underarm Turn",
-        "The Back Ocho",
-        "The Back Cross",
-        "The Back Lock",
-        "The Back Rock Step",
-        "The Back Spot Turn",
-        "The Back Whip",
-        "The Backward Break",
-      ],
-    },
-  });
+  const dances = await Dance.find();
+  console.log(dances);
+  res.status(200).json(dances);
 });
 
 //@desc Create new dance
 //@route POST /api/dance-moves
 //@access Public
 const createContact = asyncHandler(async (req, res) => {
-  const { name, email, phone } = req.body;
-  if (!name || !email || !phone) {
+  const { name, description } = req.body;
+
+  if (!name || !description) {
     res.status(400);
-    throw new Error("Please provide name, email and phone number in the body");
+    throw new Error("Please provide name and description in the body");
   }
+
+  await Dance.create({ name, description });
   res.status(201).json({ message: `CREATE DANCE: ${req.body.name}` });
 });
 
@@ -39,7 +29,8 @@ const createContact = asyncHandler(async (req, res) => {
 //@route GET /api/dance-moves/:id
 //@access Public
 const getContactById = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `GET DANCE FOR ${req.params.id}` });
+  const dance = await Dance.findById(req.params.id);
+  res.status(200).json(dance);
 });
 
 //@desc Update dance

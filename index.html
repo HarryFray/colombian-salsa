@@ -22,12 +22,12 @@
     danceMovesButton.addEventListener("click", () => {
       fetch("/api/dance-moves")
         .then((response) => response.json())
-        .then((data) => {
+        .then((dancesData) => {
           const danceMovesList = document.getElementById("dance-moves-list");
-          data?.data?.allSalsaDanceMoves.forEach((danceMoveName) => {
+          dancesData?.forEach(({ name }) => {
             const danceMoveElement = document.createElement("div");
             danceMoveElement.classList.add("dance_move_item");
-            danceMoveElement.innerText = danceMoveName;
+            danceMoveElement.innerText = name;
             danceMovesList.appendChild(danceMoveElement);
           });
         });
