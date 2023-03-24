@@ -13,13 +13,15 @@
   <body>
     <h1>COLUMBIAN SALSA</h1>
     <h3>It's about to get dancy out here</h3>
+    <input type="text" id="dance-move-name" />
+    <button id="create-dance-move-button">Create Dance Move</button>
     <button id="dance-moves-button">Get dance moves</button>
     <div class="dance_moves_list" id="dance-moves-list" />
   </body>
 
   <script>
-    const danceMovesButton = document.getElementById("dance-moves-button");
-    danceMovesButton.addEventListener("click", () => {
+    const getDanceMovesButton = document.getElementById("dance-moves-button");
+    getDanceMovesButton.addEventListener("click", () => {
       fetch("/api/dance-moves")
         .then((response) => response.json())
         .then((dancesData) => {
@@ -31,6 +33,23 @@
             danceMovesList.appendChild(danceMoveElement);
           });
         });
+    });
+
+    const createDanceMoveButton = document.getElementById(
+      "create-dance-move-button"
+    );
+
+    createDanceMoveButton.addEventListener("click", () => {
+      const danceMoveName = document.getElementById("dance-move-name").value;
+
+      console.log(danceMoveName);
+      fetch("/api/dance-moves", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: danceMoveName, description: "test" }),
+      });
     });
   </script>
 
@@ -56,6 +75,14 @@
       font-size: 20px;
       color: darkgreen;
       margin-bottom: 24px;
+    }
+
+    input {
+      font-size: 20px;
+      border: none;
+      border-radius: 4px;
+      padding: 8px;
+      margin-top: 16px;
     }
 
     button {
